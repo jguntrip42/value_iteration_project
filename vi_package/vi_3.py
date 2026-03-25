@@ -9,41 +9,6 @@ Created on Fri Mar 13 14:13:12 2026
 import numpy as np
 
 
-example_data_dict =  {
-               'TLRTR': [0.9,-1],
-               'TLRBL': [0.1, -2],
-               'TLDBL': [0.9, -2],
-               'TLDTR': [0.1, -1],
-               'TRLTL': [0.9, -3/2],
-               'TRLBR': [0.1, 10],
-               'TRDBR': [0.8, 15],
-               'TRDTL': [0.2, -1],
-               'BLRBR': [0.9, 20],
-               'BLRTL': [0.1, -5/2],
-               'BLUTL': [0.8, -1/2],
-               'BLUBR': [0.2, 5]}
-
-
-example_S = ['TL','TR','BL','BR']
-example_A = ['R','L','U','D']
-
-
-def P_0(s_new,s,a):
-    
-    if ((s+a+s_new) in example_data_dict):
-        p = example_data_dict[s+a+s_new][0]
-    else:
-        p = 0
-    
-    return p
-
-def R_0(s_new,s,a):
-    
-    return example_data_dict[s+a+s_new][1]
-
-
-
-
 def val_iteration(S,A,P,R,gamma=0.5,epsilon=0.001):
     
     """S is a list of states;
@@ -64,9 +29,6 @@ def val_iteration(S,A,P,R,gamma=0.5,epsilon=0.001):
                 if P(s_new,S[i],a) != 0:
                     A_valid_dict[S[i]] = set(A_valid_dict[S[i]]).union({a})
                     S_valid_dict[S[i]] = set(S_valid_dict[S[i]]).union({s_new})                            
-    
-    print(A_valid_dict)
-    print(S_valid_dict)
     
     # Q function
     
@@ -116,4 +78,3 @@ def val_iteration(S,A,P,R,gamma=0.5,epsilon=0.001):
 
 
 
-pi_0, val_maps_0 = val_iteration(example_S,example_A,P_0,R_0)
