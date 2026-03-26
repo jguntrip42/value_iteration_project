@@ -39,8 +39,6 @@ def val_iteration(S,A,P,R,gamma=0.5,epsilon=0.001):
         
         q_val = sum([P(s_new,s,a)*(R(s_new,s,a) + gamma*val_func[s_new]) for s_new in S_new])
         
-        print(q_val)
-        
         return q_val
         
     
@@ -63,9 +61,9 @@ def val_iteration(S,A,P,R,gamma=0.5,epsilon=0.001):
             
             A_valid = list(A_valid_dict[s]) # Get possible actions
 
-            if A_valid != []: # Update value only of states we can access from s (BR is a terminal state)
+            if A_valid != []: # Update value only with respect to states we can access from s (BR is a terminal state)
                 val_map_k[s] = max([q_func(s,a,val_maps[-1]) for a in A_valid])
-
+        
         val_maps.append(val_map_k)
         
     # Calculate updated policy
@@ -77,67 +75,11 @@ def val_iteration(S,A,P,R,gamma=0.5,epsilon=0.001):
             a_index = np.argmax(np.array([q_func(s,a,val_maps[-1]) for a in A_valid]))
             policy_map[s] = A_valid[a_index]
 
-    return policy_map, val_maps
-
-ex_1_dict =  {
-               'TLRTR': [0.9,-1],
-               'TLRBL': [0.1, -2],
-               'TLDBL': [0.9, -2],
-               'TLDTR': [0.1, -1],
-               'TRLTL': [0.9, -3/2],
-               'TRLBR': [0.1, 10],
-               'TRDBR': [0.8, 15],
-               'TRDTL': [0.2, -1],
-               'BLRBR': [0.9, 20],
-               'BLRTL': [0.1, -5/2],
-               'BLUTL': [0.8, -1/2],
-               'BLUBR': [0.2, 5]}
 
 
-ex_1_S = ['TL','TR','BL','BR']
-ex_1_A = ['R','L','U','D']
-
-
-ex_2_dict = {
-        'HRH':[0.95,7],
-        'HPH':[0.7,10],
-        'SRH':[0.5,0],
-        'SPH':[0.1,2]
-    }
-
-ex_2_S = ['H','S']
-ex_2_A = ['R','P']
-
-
-def P(ex_dict,s_new,s,a):
-    
-    if ((s+a+s_new) in ex_dict):
-        p = ex_dict[s+a+s_new][0]
-    else:
-        p = 0
-    
-    return p
-
-def R(ex_dict,s_new,s,a):
-    
-    return ex_dict[s+a+s_new][1]
-
-P_1 = partial(P,ex_1_dict)
-R_1 = partial(R,ex_1_dict)
-P_2 = partial(P,ex_2_dict)
-R_2 = partial(P,ex_2_dict)
+    return policy_map,val_maps[-1]
 
 
 
-def test_1():
-	pi, val_maps = val_iteration(ex_1_S,ex_1_A,P_1,R_1,gamma=0.9)
-	return(pi,val_maps)
 
-#pi_1,val_maps_1 = test_1()
-
-def test_2():
-	pi, val_maps = val_iteration(ex_2_S,ex_2_A,P_2,R_2,gamma=0.8)
-	return(pi,val_maps)
-
-pi_2,val_maps_2 = test_2()
 
