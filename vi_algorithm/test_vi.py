@@ -70,12 +70,7 @@ def test_1():
                        'BR': 0}
 
     
-    if (pi == correct_pi) and (val_map == correct_val_map):
-        result = "PASSED_TEST_1"
-    else:
-        result = "FAILED_TEST_1"
-    
-    return result
+    assert ((pi == correct_pi) and (val_map == correct_val_map))
 
 
 def test_2():
@@ -86,10 +81,5 @@ def test_2():
     correct_val_map = {'H': 35.711062336395926, 'S': 23.80630043163403}
 
     
-    if (pi == correct_pi) and (val_map == correct_val_map):
-        result = "PASSED_TEST_2"
-    else:
-        result = "FAILED_TEST_2"
-    
-    return result
+    assert ((pi == correct_pi) and (val_map == correct_val_map))
 
