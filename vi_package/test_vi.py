@@ -35,4 +35,8 @@ def R_0(s_new,s,a):
     return example_data_dict[s+a+s_new][1]
 
 
-pi_0, val_maps_0 = val_iteration(example_S,example_A,P_0,R_0)
+def test_1:
+	pi_0, val_maps_0 = val_iteration(example_S,example_A,P_0,R_0)
+	return(pi_0,val_maps_0)
+
+
