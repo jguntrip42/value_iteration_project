@@ -9,7 +9,7 @@ maintainers = [
   { name="Joseph Guntrip", email="j.guntrip@lancaster.ac.uk" },
 ]
 authors = [
-  { name="Daniel Grose", email="j.guntrip@lancaster.ac.uk"},
+  { name="Joseph Guntrip", email="j.guntrip@lancaster.ac.uk"},
 ]
 description = "Computes optimal policy for MDPs"
 requires-python = ">=3.13.10"
