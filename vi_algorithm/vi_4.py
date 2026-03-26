@@ -7,16 +7,16 @@ Created on Fri Mar 13 14:13:12 2026
 """
 
 import numpy as np
-from functools import partial
 
 
-def val_iteration(S,A,P,R,gamma=0.5,epsilon=0.001):
+def val_iteration(S,A,P,R,gamma=0.9,epsilon=0.001):
     
     """S is a list of states;
     A is a list of actions;
     P is the state transition function specifying P(s'|s,a);
     R is a reward function R(s'|s,a);
-    gamma is the discount factor in [0,1)"""
+    gamma is the discount factor in [0,1) (larger value means we prioritise exploration over exploitation);
+    epsilon is the maximum difference we consider for a solution for the value map to have converged"""
     
 
     # Set up accessible actions and states from specified state
